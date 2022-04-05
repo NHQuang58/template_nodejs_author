@@ -1,0 +1,568 @@
+components:
+  schemas:
+    user:
+      type: object
+      properties:
+        role:
+          type: string
+        avatar:
+          type: string
+        address:
+          type: string
+        extraSkill:
+          type: array
+          items:
+            type: string
+        nationality:
+          type: string
+        isBlackList:
+          type: boolean
+        isActive:
+          type: boolean
+        isVerify:
+          type: boolean
+        evaluation:
+          type: string
+        allocation:
+          type: string
+        mentor:
+          type: string
+        mentorFullName:
+          type: string
+        cv:
+          type: string
+        id:
+          type: integer
+        accountId:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        dob:
+          type: string
+          format: date
+        age:
+          type: integer
+        fullName:
+          type: string
+        fullDepartmentName:
+          type: string
+        mainSkill:
+          type: string
+        level:
+          type: integer
+        status:
+          type: string
+        parentDepartmentName:
+          type: string
+        childDepartmentName:
+          type: string
+        workplace:
+          type: string
+      example:
+        role: user
+        avatar: http://cdn.onlinewebfonts.com/svg/img_339542.png
+        address: hai ba trung
+        extraSkill: ['C', 'C++']
+        nationality: Viet Nam
+        isBlackList: false
+        isActive: true
+        isVerify: true
+        evaluation: "evaluation"
+        allocation: "allocation"
+        mentor: "TuanDV32"
+        mentorFullName: "Đoàn Văn Tuấn"
+        cv: "cv"
+        accountId: "quangnh69"
+        email: quangnh69@gmail.com
+        password: pass
+        dob: 1999-03-04
+        age: 23
+        fullName: Nguyễn Hồng Quang
+        phoneNumber: "+84855513506"
+        fullDepartmentName: FWA.EC
+        mainSkill: Java
+        level: 10
+        status: Onboard
+        parentDepartmentName: "parentDepartmentName"
+        childDepartmentName: "childDepartmentName"
+        workplace: "workplace"
+        type: Internal
+        site: Hà Nội
+        onboardDay: 2022-03-01
+
+    Token:
+      type: object
+      properties:
+        token:
+          type: string
+        expires:
+          type: string
+          format: date-time
+      example:
+        token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZWJhYzUzNDk1NGI1NDEzOTgwNmMxMTIiLCJpYXQiOjE1ODkyOTg0ODQsImV4cCI6MTU4OTMwMDI4NH0.m1U63blB0MLej_WfB7yC2FTMnCziif9X8yzwDEfJXAg
+        expires: 2020-05-12T16:18:04.793Z
+
+    AuthTokens:
+      type: object
+      properties:
+        access:
+          $ref: '#/components/schemas/Token'
+        refresh:
+          $ref: '#/components/schemas/Token'
+
+    interview:
+      type: object
+      required:
+        - interviewDepartment
+        - interviewDay
+      properties:
+        interviewParentDepartment:
+          type: string
+        interviewChildDepartment:
+          type: string
+        status:
+          type: string
+        evaluationByInterviewer:
+          type: string
+        id:
+          type: integer
+        interviewDepartment:
+          type: string
+        interviewDay:
+          type: string
+          format: date
+        userId:
+          type: integer
+      example:
+        interviewParentDepartment: FWA
+        interviewChildDepartment: EC
+        status: Pass
+        evaluationByInterviewer: Very good
+        interviewDepartment: FWA.EC
+        interviewDay: "2022-06-10"
+
+    mobilization:
+      type: object
+      properties:
+        currentDepartment:
+          type: string
+        lastModifiedTime:
+          type: string
+          format: date-time
+        lastModifiedBy:
+          type: string
+        id:
+          type: integer
+        userId:
+          type: integer
+      example:
+        id: 9
+        userId: 3
+        currentDepartment: FLC
+        lastModifiedTime: "2022-03-02T19:00:28.966Z"
+        lastModifiedBy: TuanDV32@gmail.com
+
+    history:
+      type: object
+      properties:
+        statusUpdate:
+          type: string
+        lastModifiedTime:
+          type: string
+          format: date-time
+        lastModifiedBy:
+          type: string
+        detailUpdate:
+          type: string
+        id:
+          type: integer
+        userId:
+          type: integer
+      example:
+        id: 9
+        userId: 3
+        statusUpdate: Success
+        detailUpdate: "{\"address\":\"Hai Ba Trung\"}"
+        lastModifiedTime: "2022-03-02T19:00:28.966Z"
+        lastModifiedBy: TuanDV32@gmail.com
+
+    requestDetail:
+      type: object
+      properties:
+        supervisor:
+          type: string
+        partialId:
+          type: integer
+        reason:
+          type: string
+        supervisorFullName:
+          type: string
+        approverFullName:
+          type: string
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+        requester:
+          type: string
+      example:
+        supervisor: TuanDV32
+        partialId: 123
+        reason: WFH
+        supervisorFullName: Doan Van Tuan
+        approverFullName: Dinh Van Toi
+        startDate: "01-03-2022"
+        endDate: "05-03-2022"
+        requester: QuangNH33
+    request:
+      type: object
+      properties:
+        userId:
+          type: integer
+        approver:
+          type: string
+        totalDuration:
+          type: integer
+        detailReason:
+          type: string
+        delegateTo:
+          type: string
+        status:
+          type: string
+      example:
+        userId: 9
+        approver: ToiDV
+        totalDuration: 5
+        detailReason: Lam viec tai nha vi covid
+        delegateTo: TuanDV32
+        status: Pending
+    requestDetailFromBE:
+      type: object
+      properties:
+        userId:
+          type: integer
+        approver:
+          type: string
+        totalDuration:
+          type: integer
+        detailReason:
+          type: string
+        delegateTo:
+          type: string
+        status:
+          type: string
+        requestDetail:
+          type: object
+          properties:
+            supervisor:
+              type: string
+            partialId:
+              type: integer
+            reason:
+              type: string
+            supervisorFullName:
+              type: string
+            approverFullName:
+              type: string
+            startDate:
+              type: string
+              format: date
+            endDate:
+              type: string
+              format: date
+            requester:
+              type: string
+      example:
+        userId: 9
+        approver: ToiDV
+        totalDuration: 5
+        detailReason: Lam viec tai nha vi covid
+        delegateTo: TuanDV32
+        status: Pending
+        requestDetail:
+          requestId: 4
+          supervisor: TuanDV32
+          partialId: 123
+          reason: WFH
+          supervisorFullName: Doan Van Tuan
+          approverFullName: Dinh Van Toi
+          startDate: "01-03-2022"
+          endDate: "05-03-2022"
+          requester: QuangNH33
+    detailAccount:
+      type: object
+      properties:
+        role:
+          type: string
+        avatar:
+          type: string
+        address:
+          type: string
+        extraSkill:
+          type: array
+          items:
+            type: string
+        nationality:
+          type: string
+        isBlackList:
+          type: boolean
+        isActive:
+          type: boolean
+        isVerify:
+          type: boolean
+        evaluation:
+          type: string
+        allocation:
+          type: string
+        mentor:
+          type: string
+        mentorFullName:
+          type: string
+        cv:
+          type: string
+        id:
+          type: integer
+        accountId:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        dob:
+          type: string
+          format: date
+        age:
+          type: integer
+        fullName:
+          type: string
+        fullDepartmentName:
+          type: string
+        mainSkill:
+          type: string
+        level:
+            type: integer
+        status:
+          type: string
+        parentDepartmentName:
+          type: string
+        childDepartmentName:
+          type: string
+        workplace:
+          type: string
+        interviews:
+          type: array
+          items:
+            $ref: '#/components/schemas/interview'
+        mobilizationHistories:
+          type: array
+          items:
+            $ref: '#/components/schemas/mobilization'
+        requests:
+          type: array
+          items:
+            $ref: '#/components/schemas/request'
+        histories:
+          type: array
+          items:
+            $ref: '#/components/schemas/history'
+    Error:
+      type: object
+      properties:
+        status:
+          type: number
+        message:
+          type: string
+        data:
+          type: null
+
+  responses:
+    DuplicateEmail:
+      description: Email address already in use
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            status: 400
+            message: Email address already in use!
+            data: null
+    DuplicateNumberPhone:
+      description: Contact already in use
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            status: 400
+            message: Contact already in use!
+            data: null
+    EmailNotFound:
+      description: Email not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            status: 400
+            message: No user found with this email!
+            data: null
+    IncorrectEmailOrPassword:
+      description: Incorecct email or password
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            status: 401
+            message: Incorrect email or password
+            data: null
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            status: 401
+            message: Please authenticate
+            data: null
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            status: 403
+            message: Forbidden
+            data: null
+    NotFound:
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            status: 404
+            message: Not found
+            data: null
+    CannotCreateInterview:
+      description:  Cannot create interview with this userId
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            status: 400
+            message:  Cannot create interview with this userId!
+            data: null
+    CannotGetInterview:
+      description: Cannot get interview with this userId
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            status: 400
+            message: Cannot get interview with this userId!
+            data: null
+    InterviewNotFound:
+      description: Interview NotFound
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            status: 400
+            message: Interview NotFound!
+            data: null
+    CannotCreateMobilization:
+      description: Cannot create mobilization with this userId
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            status: 400
+            message: Cannot create mobilization with this userId!
+            data: null
+    CannotGetMobilization:
+      description: Cannot get mobilization with this userId
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            status: 400
+            message: Cannot get mobilization with this userId!
+            data: null
+    MobilizationNotFound:
+      description: Mobilization NotFound
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            status: 400
+            message: Mobilization NotFound!
+            data: null
+    CannotGetHistory:
+      description: Cannot get histories with this userId
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            status: 400
+            message: Cannot get histories with this userId!
+            data: null
+    HistoryNotFound:
+      description:  History NotFound
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            status: 400
+            message:  History NotFound!
+            data: null
+    CannotGetRequest:
+      description: Cannot get request with this userId
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            status: 400
+            message: Cannot get request with this userId!
+            data: null
+    RequestNotFound:
+      description: Request NotFound
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            status: 400
+            message: Request NotFound!
+            data: null
+    AccountNotFound:
+      description: Account not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            status: 400
+            message: Account not found!
+            data: null
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

@@ -1,0 +1,13 @@
+# Dependencies
+node_modules
+.vscode
+# yarn error logs
+yarn-error.log
+
+# Environment varibales
+!.env*.example
+
+# Code coverage
+coverage
+#folder excel
+/excel/*.xlsx
